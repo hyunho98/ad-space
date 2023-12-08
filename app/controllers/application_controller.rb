@@ -15,4 +15,8 @@ class ApplicationController < ActionController::API
   def render_unprocessable_entity(err)
     render json: { errors: err.record.errors.full_messages }, status: :unprocessable_entity
   end
+
+  def company_only
+    render json: { errors: ["You must be a company to do this"] }, status: :unauthorized unless session[:user_type] == "Company"
+  end
 end

@@ -1,34 +1,38 @@
 class AdsController < ApplicationController
+    before_action :company_only, only: [:create, destroy]
+
     def index
         ads = Ad.all
         render json: ads
     end
 
     def create
-        company = Company.find(session[:user_id])
+        company = User.find(session[:user_id]).userable
         ad = company.ads.create!(ad_params)
         render json: ad
     end
 
     def update
-        company = Company.find(session[:user_id])
-        ad = company.ads.find(params[:id])
-        ad.update!(ad_params)
-        render json: ad
-    end
-
-    def advertiser_update
+        user = User.find(session[:user_id]).userable
         ad = Ad.find(params[:id])
-        if ad.advertiser_id == session[:user_id] || !ad.advertiser_id
-            ad.update!(ad_params)
+        
+        if session[:user_type] == "Company"
+            user.ads.find(ad.id).update!(ad_params)
         else
-            unauthorized
+            if ad.advertiser_id == session[:user_id]
+                ad.advertiser_id = nil
+            elsif !ad.advertiser_id
+                user.ads.push(ad)
+            else
+                render json: { errors: ["This ad has already been taken"] }, status: :unauthorized
+            end
         end
+
         render json: ad
     end
 
     def destroy
-        company = Company.find(session[:user_id])
+        company = User.find(session[:user_id]).userable
         ad = company.ads.find(params[:id])
         ad.destroy
         head :no_content

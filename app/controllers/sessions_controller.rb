@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
 
         if user&.authenticate(params[:password])
             session[:user_id] = user.id
+            session[:user_type] = user.userable_type
             render json: user.userable, status: :created
         else
             render json: { errors: ["Invalid username or password"] }, status: :unauthorized
@@ -14,6 +15,7 @@ class SessionsController < ApplicationController
 
     def destroy
         session.delete :user_id
+        session.delete :user_type
         head :no_content
     end
 end

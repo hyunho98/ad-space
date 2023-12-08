@@ -13,9 +13,10 @@ class UsersController < ApplicationController
             Agency.create!(userable_params)
         )
 
-        user = User.create!({**user_params, userable: company_agency}).userable
+        user = User.create!({**user_params, userable: company_agency})
         session[:user_id] = user.id
-        render json: user, status: :created
+        session[:user_type] = user.userable_type
+        render json: user.userable, status: :created
     end
 
     def update
