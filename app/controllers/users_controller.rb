@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: [:create, :destroy]
+    skip_before_action :authorize, only: [:create]
 
     def show
         user = User.find(session[:user_id]).userable
@@ -12,7 +12,9 @@ class UsersController < ApplicationController
         ) : (
             Agency.create!(userable_params)
         )
+
         user = User.create!({**user_params, userable: company_agency}).userable
+        session[:user_id] = user.id
         render json: user, status: :created
     end
 
@@ -23,7 +25,7 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        user = User.find(params[:id])
+        user = User.find(session[:user_id])
         user.destroy
         head :no_content
     end

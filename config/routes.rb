@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :ads
   resources :agencies
   resources :companies
   resources :users
