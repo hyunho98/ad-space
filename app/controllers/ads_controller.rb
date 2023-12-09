@@ -15,14 +15,14 @@ class AdsController < ApplicationController
     def update
         user = User.find(session[:user_id]).userable
         ad = Ad.find(params[:id])
-        
+
         if session[:user_type] == "Company"
             user.ads.find(ad.id).update!(ad_params)
         else
             if ad.advertiser_id == session[:user_id]
                 ad.advertiser_id = nil
             elsif !ad.advertiser_id
-                user.ads.push(ad)
+                ad.advertiser_id = session[:user_id]
             else
                 render json: { errors: ["This ad has already been taken"] }, status: :unauthorized
             end

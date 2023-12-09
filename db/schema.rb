@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2023_12_08_004607) do
     t.string "product"
     t.text "content"
     t.string "image_url"
-    t.integer "advertiser_id"
+    t.integer "agency_id"
     t.integer "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -4,7 +4,7 @@ class CreateAds < ActiveRecord::Migration[6.1]
       t.string :product
       t.text :content
       t.string :image_url
-      t.integer :advertiser_id
+      t.integer :agency_id
       t.integer :company_id
 
       t.timestamps
