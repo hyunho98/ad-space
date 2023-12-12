@@ -1,5 +1,6 @@
 class AdsController < ApplicationController
     before_action :company_only, only: [:create, destroy]
+    skip_before_action :authorize, only: [:index]
 
     def index
         ads = Ad.all
