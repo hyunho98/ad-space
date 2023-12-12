@@ -1,7 +1,8 @@
 import './App.css'
-import { UserContext } from '../context/UserProvider'
+import { UserContext } from './context/UserProvider'
 import { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { Login } from '../pages/Login'
 
 function App() {
   const { user } = useContext(UserContext)
@@ -19,4 +20,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
