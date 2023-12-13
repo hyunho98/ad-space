@@ -1,17 +1,17 @@
 import { useState, useContext } from "react"
 import { Form, Message } from "semantic-ui-react"
-import { UserContext } from '.../context/UserProvider'
+import { UserContext } from '../context/UserProvider'
 
 function LoginForm() {
   const { setUser, navigate } = useContext(UserContext)
   const [errors, setErrors] = useState([])
-  const [loginForm, setLoginForm] = useState({
+  const [loginBody, setLoginBody] = useState({
     username: "",
     password: ""
   })
 
   function handleChange(e) {
-    setLoginForm({...loginForm, [e.target.name]: e.target.value})
+    setLoginBody({...loginBody, [e.target.name]: e.target.value})
   }
 
   function handleSubmit(e) {
@@ -21,7 +21,7 @@ function LoginForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(loginForm),
+      body: JSON.stringify(loginBody),
     })
     .then((response) => {
       if (response.ok) {
@@ -41,14 +41,14 @@ function LoginForm() {
       <Form.Input
         label='Username'
         name='username'
-        value={loginForm.username}
+        value={loginBody.username}
         onChange={handleChange}
       />
       <Form.Input 
         label='Password'
         name='password'
         type='password'
-        value={loginForm.password}
+        value={loginBody.password}
         onChange={handleChange}
       />
       <Form.Button content='Login' />
