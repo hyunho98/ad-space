@@ -8,9 +8,9 @@ class UsersController < ApplicationController
 
     def create
         company_agency = params.has_key?(:industry) ? (
-            Company.create!(userable_params)
+            Company.new(company_params)
         ) : (
-            Agency.create!(userable_params)
+            Agency.new(agency_params)
         )
 
         user = User.create!({**user_params, userable: company_agency})
@@ -37,12 +37,12 @@ class UsersController < ApplicationController
         params.permit(:username, :password, :password_confirmation)
     end
 
-    def userable_params
-        params.has_key?(:industry) ? (
-            params.permit(:name, :industry, :image_url)
-        ) : (
-            params.permit(:name, :market, :image_url)
-        )
+    def company_params
+        params.permit(:name, :industry, :image_url)
+    end
+
+    def agency_params
+        params.permit(:name, :market, :image_url)
     end
 
     def render_not_found

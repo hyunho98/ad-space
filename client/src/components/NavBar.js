@@ -22,7 +22,7 @@ function NavBar() {
             <Menu.Item
                 name='new ad'
                 as={Link}
-                to='/ad/create'
+                to='/ads/new'
             /> 
         ) : ( null )
     

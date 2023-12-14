@@ -1,5 +1,5 @@
 class AdsController < ApplicationController
-    before_action :company_only, only: [:create, destroy]
+    before_action :company_only, only: [:create, :destroy]
     skip_before_action :authorize, only: [:index]
 
     def index
@@ -20,7 +20,7 @@ class AdsController < ApplicationController
         if session[:user_type] == "Company"
             user.ads.find(ad.id).update!(ad_params)
         else
-            if ad.advertiser_id == session[:user_id]
+            if ad.advertiser_id == user.id
                 ad.advertiser_id = nil
             elsif !ad.advertiser_id
                 ad.advertiser_id = session[:user_id]

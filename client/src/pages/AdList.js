@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { Link } from 'react-router-dom'
 import { Card, Image } from "semantic-ui-react"
-import { UserContext } from "../components/context/App"
+import { UserContext } from "../components/context/UserProvider"
 
 function AdList() {
     const { ads } = useContext(UserContext)

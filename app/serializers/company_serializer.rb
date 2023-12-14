@@ -3,4 +3,5 @@ class CompanySerializer < ActiveModel::Serializer
 
   has_many :ads
   has_many :agencies
+  has_one :user
 end

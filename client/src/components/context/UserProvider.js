@@ -5,14 +5,17 @@ export const UserContext = createContext()
 
 function UserProvider({ children }) {
     const [user, setUser] = useState()
-    const [ads, setAds] = useState()
+    const [ads, setAds] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
         fetch('/me')
             .then((response) => {
                 if (response.ok) {
-                    response.json().then((data) => setUser(data))
+                    response.json().then((data) => {
+                        console.log(data)
+                        setUser(data)
+                    })
                 }
             })
         fetch('/ads')
