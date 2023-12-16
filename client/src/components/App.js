@@ -7,6 +7,7 @@ import NavBar from './NavBar'
 import AdList from '../pages/AdList'
 import NewAd from '../pages/NewAd'
 import EditAd from '../pages/EditAd'
+import ViewAd from '../pages/ViewAd'
 
 
 function App() {
@@ -26,6 +27,10 @@ function App() {
           <Route 
             path='/ads/edit/:id'
             element={<EditAd />}
+          />
+          <Route
+            path='/ads/:id'
+            element={<ViewAd />}
           />
           <Route
             path="/"
