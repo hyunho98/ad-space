@@ -20,10 +20,11 @@ class AdsController < ApplicationController
         if session[:user_type] == "Company"
             user.ads.find(ad.id).update!(ad_params)
         else
-            if ad.advertiser_id == user.id || ad.advertiser_id.nil?
-                ad.advertiser_id = params.permit(:advertiser_id)
+            if ad.agency_id == user.id || ad.agency_id.nil?
+                ad.update!(params.permit(:agency_id))
             else
                 render json: { errors: ["This ad has already been taken"] }, status: :unauthorized
+                return
             end
         end
 

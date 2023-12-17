@@ -27,8 +27,8 @@ function CompanySignup() {
         if (response.ok) {
             response.json()
             .then((data) => {
-                setUser(data)
                 navigate('/')
+                setUser(data)
             })
         } else {
             response.json()

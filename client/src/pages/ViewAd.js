@@ -79,23 +79,21 @@ function ViewAd() {
                     <Segment>{ad.content}</Segment>
                 </Segment.Group>
                 {
-                    ad.agency_id ? (
+                    ad.agency ? (
                         <Segment.Group>
-                            <Segment className='Center-text' >
-                                    <Image size='small' centered={true} src={ad.agency.image_url} />
-                                    {`${ad.agency.name} | ${ad.agency.market}`}
-                            </Segment>
-                            { ad.agency_id == user.id ? (
-                                <Segment.Group>
+                            <Segment className='Center-text' clearing={true}>
+                                <Image size='small' centered={true} src={ad.agency.image_url} />
+                                {`${ad.agency.name} | ${ad.agency.market}`}
+                                { ad.agency.id == user.id ? (
                                     <Button onClick={handleUnclaim} content='Unclaim Ad' color='red' floated='right' />
-                                </Segment.Group>
-                            ) : null}
+                                ) : null}
+                            </Segment>
                         </Segment.Group>
                     ) : (
                         user.user.userable_type == "Company" ? (
                             <Segment>This ad has not been claimed yet</Segment>
                         ) : (
-                            <Segment>
+                            <Segment clearing={true}>
                                 <Button onClick={handleClaim} content='Claim Ad' floated='right' />
                             </Segment>
                         )
