@@ -8,16 +8,16 @@ function UserProvider({ children }) {
     const [ads, setAds] = useState([])
     const navigate = useNavigate()
 
-    useEffect(() => {
-        fetch('/ads')
+    useEffect(async () => {
+        await fetch('/ads')
             .then((response) => response.json())
-            .then((data) => setAds(data))
+            .then((data) => {
+                setAds(data)
+            })
         fetch('/me')
             .then((response) => {
                 if (response.ok) {
-                    response.json().then((data) => {
-                        setUser(data)
-                    })
+                    response.json().then((data) => setUser(data))
                 }
             })
     }, [])
