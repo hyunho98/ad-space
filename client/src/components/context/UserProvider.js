@@ -9,18 +9,17 @@ function UserProvider({ children }) {
     const navigate = useNavigate()
 
     useEffect(() => {
+        fetch('/ads')
+            .then((response) => response.json())
+            .then((data) => setAds(data))
         fetch('/me')
             .then((response) => {
                 if (response.ok) {
                     response.json().then((data) => {
-                        console.log(data)
                         setUser(data)
                     })
                 }
             })
-        fetch('/ads')
-            .then((response) => response.json())
-            .then((data) => setAds(data))
     }, [])
 
     return (

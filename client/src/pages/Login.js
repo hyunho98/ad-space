@@ -31,7 +31,7 @@ function Login() {
                     value={signUpSwitch}
                     onClick={() => setSignUpSwitch(!signUpSwitch)}
                     /> &nbsp;
-                    Advertiser
+                    Advertising Agency
                 </p>
                 { !signUpSwitch ? <CompanySignup /> : <AgencySignup /> }
                 <p>

@@ -8,6 +8,7 @@ import AdList from '../pages/AdList'
 import NewAd from '../pages/NewAd'
 import EditAd from '../pages/EditAd'
 import ViewAd from '../pages/ViewAd'
+import ViewProfile from '../pages/ViewProfile'
 
 
 function App() {
@@ -31,6 +32,10 @@ function App() {
           <Route
             path='/ads/:id'
             element={<ViewAd />}
+          />
+          <Route
+            path='/my_profile'
+            element={<ViewProfile />}
           />
           <Route
             path="/"

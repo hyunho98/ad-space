@@ -54,9 +54,9 @@ function ViewAd() {
         })
         .then((response) => {
             if (response.ok) {
+                navigate('/')
                 setUser({...user, ads: user.ads.filter((a) => a.id != ad.id)})
                 setAds(ads.filter((a) => a.id != ad.id))
-                navigate('/')
             }
         })
     }
@@ -64,11 +64,10 @@ function ViewAd() {
     return (
         <Container>
             <Segment.Group>
-                <Image src={ad.image_url} centered={true} size='medium' />
                 <Segment className='Center-text'>
-                    <Image src={ad.company.image_url} centered={true} size='small' />
+                    <Image src={ad.image_url} centered={true} size='medium' />
                     {`${ad.product} ( ${ad.company.name} | ${ad.company.industry} )`}
-                    { ad.company_id == user.id && user.user.userable_type == "Company" ? (
+                    { ad.company.id == user.id && user.user.userable_type == "Company" ? (
                         <>
                             <Button size='small' as={Link} to={`/ads/edit/${ad.id}`} content='Edit' floated='right' />
                             <Button size='small' color='red' onClick={handleDelete} content='Delete' floated='right'/>
@@ -82,9 +81,8 @@ function ViewAd() {
                     ad.agency ? (
                         <Segment.Group>
                             <Segment className='Center-text' clearing={true}>
-                                <Image size='small' centered={true} src={ad.agency.image_url} />
-                                {`${ad.agency.name} | ${ad.agency.market}`}
-                                { ad.agency.id == user.id ? (
+                                {`Claimed by ${ad.agency.name} (${ad.agency.market})`}
+                                { ad.agency.id == user.id && user.user.userable_type == "Agency" ? (
                                     <Button onClick={handleUnclaim} content='Unclaim Ad' color='red' floated='right' />
                                 ) : null}
                             </Segment>

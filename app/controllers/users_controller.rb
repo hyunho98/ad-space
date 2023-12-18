@@ -21,7 +21,11 @@ class UsersController < ApplicationController
 
     def update
         user = User.find(session[:user_id]).userable
-        user.update!(userable_params)
+        if session[:user_type] == "Company"
+            user.update!(company_params)
+        elsif session[:user_type] == "Agency"
+            user.update!(agency_params)
+        end
         render json: user
     end
 

@@ -39,7 +39,7 @@ function AdForm ({ adParams=null }) {
             .then((response) => {
                 if (response.ok) {
                     response.json().then((data) => {
-                        setAds(ads.map((ad) => (ad.id === data.id) ? data : ad))
+                        setAds(ads.map((ad) => (ad.id == data.id) ? data : ad))
                         navigate(`/ads/${data.id}`)
                     })
                 } else {
@@ -58,7 +58,7 @@ function AdForm ({ adParams=null }) {
                 if (response.ok) {
                     response.json().then((data) => {
                         setAds([...ads, data])
-                        navigate("/")
+                        navigate(`/ads/${data.id}`)
                     })
                 } else {
                     response.json().then((data) => setErrors(data.errors))
