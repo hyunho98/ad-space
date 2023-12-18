@@ -2,7 +2,7 @@ main {
   justify-content: center;
 }
 
-.Center-text h2{
+.Center-text, h2{
   text-align: center;
 }
 

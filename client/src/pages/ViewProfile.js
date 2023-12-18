@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Segment, Container, Image } from 'semantic-ui-react'
+import { Segment, Container, Image, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../components/context/UserProvider'
 import AdCards from '../components/AdCards'
@@ -11,7 +11,7 @@ function ViewProfile () {
     return (
         <Container>
             <Segment.Group>
-                <Segment className='Center-text'>
+                <Segment className='Center-text' clearing={true}>
                     <Image src={user.image_url} centered={true} size={'medium'} />
                     {user.name}
                     <Segment.Group>
@@ -21,12 +21,14 @@ function ViewProfile () {
                         ) : (
                             <Segment>Market: {user.market}</Segment>
                         )}
+                        <Button floated='right' as={Link} to={'/my_profile/edit'} content='Edit' />
                     </Segment.Group>
                 </Segment>
             </Segment.Group>
             { user.ads.length > 0 ? (
                 <Segment.Group>
                     <Segment>
+                        <h2>My Ads</h2>
                         <AdCards ads={userAds} />
                     </Segment>
                 </Segment.Group>

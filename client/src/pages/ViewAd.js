@@ -63,8 +63,8 @@ function ViewAd() {
 
     return (
         <Container>
-            <Segment.Group>
-                <Segment className='Center-text'>
+            <Segment.Group >
+                <Segment className='Center-text' clearing={true}>
                     <Image src={ad.image_url} centered={true} size='medium' />
                     {`${ad.product} ( ${ad.company.name} | ${ad.company.industry} )`}
                     { ad.company.id == user.id && user.user.userable_type == "Company" ? (

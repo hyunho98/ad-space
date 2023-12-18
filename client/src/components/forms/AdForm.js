@@ -3,7 +3,7 @@ import { Form, Message } from 'semantic-ui-react'
 import { UserContext } from '../context/UserProvider'
 
 function AdForm ({ adParams=null }) {
-    const { ads, setAds, navigate } = useContext(UserContext)
+    const { user, setUser, ads, setAds, navigate } = useContext(UserContext)
     const [errors, setErrors] = useState()
     const [adBody, setAdBody] = useState({
         product: "",
@@ -40,6 +40,7 @@ function AdForm ({ adParams=null }) {
                 if (response.ok) {
                     response.json().then((data) => {
                         setAds(ads.map((ad) => (ad.id == data.id) ? data : ad))
+                        setUser({...user, ads: user.ads.map((ad) => ad.id == data.id ? data : ad)})
                         navigate(`/ads/${data.id}`)
                     })
                 } else {
@@ -58,6 +59,7 @@ function AdForm ({ adParams=null }) {
                 if (response.ok) {
                     response.json().then((data) => {
                         setAds([...ads, data])
+                        setUser({...user, ads: [...user.ads, data]})
                         navigate(`/ads/${data.id}`)
                     })
                 } else {

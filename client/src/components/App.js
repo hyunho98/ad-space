@@ -9,6 +9,7 @@ import NewAd from '../pages/NewAd'
 import EditAd from '../pages/EditAd'
 import ViewAd from '../pages/ViewAd'
 import ViewProfile from '../pages/ViewProfile'
+import EditProfile from '../pages/EditProfile'
 
 
 function App() {
@@ -36,6 +37,10 @@ function App() {
           <Route
             path='/my_profile'
             element={<ViewProfile />}
+          />
+          <Route
+            path='/my_profile/edit'
+            element={<EditProfile />}
           />
           <Route
             path="/"

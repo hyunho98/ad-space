@@ -29,12 +29,6 @@ class UsersController < ApplicationController
         render json: user
     end
 
-    def destroy
-        user = User.find(session[:user_id])
-        user.destroy
-        head :no_content
-    end
-
     private
 
     def user_params
