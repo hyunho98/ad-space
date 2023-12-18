@@ -1,5 +1,4 @@
 import { useContext } from "react"
-import { Card } from "semantic-ui-react"
 import { UserContext } from "../components/context/UserProvider"
 import AdCards from '../components/AdCards'
 

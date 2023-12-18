@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { UserContext } from '../components/context/UserProvider'
 import { Segment, Image, Button, Container } from 'semantic-ui-react'

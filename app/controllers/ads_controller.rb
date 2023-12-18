@@ -18,7 +18,8 @@ class AdsController < ApplicationController
         ad = Ad.find(params[:id])
 
         if session[:user_type] == "Company"
-            user.ads.find(ad.id).update!(ad_params)
+            ad = user.ads.find(ad.id)
+            ad.update!(ad_params)
         else
             if ad.agency_id == user.id || ad.agency_id.nil?
                 ad.update!(params.permit(:agency_id))

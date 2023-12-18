@@ -1,26 +1,20 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { Form, Message } from 'semantic-ui-react'
 import { UserContext } from '../context/UserProvider'
 
 function AdForm ({ adParams=null }) {
     const { user, setUser, ads, setAds, navigate } = useContext(UserContext)
+    const ad = adParams ? (ads.find((ad) => ad.id == adParams.id)) : null
     const [errors, setErrors] = useState()
-    const [adBody, setAdBody] = useState({
+    const [adBody, setAdBody] = useState(ad ? {
+        product: ad.product,
+        content: ad.content,
+        image_url: ad.image_url
+    } : {
         product: "",
         content: "",
         image_url: ""
     })
-
-    useEffect(() => {
-        if (adParams) {
-            const ad = ads.find((ad) => ad.id == adParams.id)
-            setAdBody({
-                product: ad.product,
-                content: ad.content,
-                image_url: ad.image_url
-            })
-        } // eslint-disable-next-line
-    }, [])
 
     function handleChange(e) {
         setAdBody({...adBody, [e.target.name]: e.target.value})
@@ -39,9 +33,10 @@ function AdForm ({ adParams=null }) {
             .then((response) => {
                 if (response.ok) {
                     response.json().then((data) => {
-                        setAds(ads.map((ad) => (ad.id == data.id) ? data : ad))
-                        setUser({...user, ads: user.ads.map((ad) => ad.id == data.id ? data : ad)})
+                        console.log(data)
                         navigate(`/ads/${data.id}`)
+                        setAds(ads.map((ad) => ad.id == data.id ? data : ad))
+                        setUser({...user, ads: user.ads.map((ad) => ad.id == data.id ? data : ad)})
                     })
                 } else {
                     response.json().then((data) => setErrors(data.errors))
