@@ -42,6 +42,9 @@ class AdsController < ApplicationController
     private
 
     def ad_params
+        if params[:image_url].empty?
+            params[:image_url] = 'https://www.lg.com/lg5-common/images/common/product-default-list-350.jpg'
+        end
         params.permit(:product, :content, :image_url)
     end
 

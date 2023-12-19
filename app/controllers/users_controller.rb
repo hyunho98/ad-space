@@ -36,10 +36,16 @@ class UsersController < ApplicationController
     end
 
     def company_params
+        if params[:image_url].empty?
+            params[:image_url] = 'https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg'
+        end
         params.permit(:name, :industry, :image_url)
     end
 
     def agency_params
+        if params[:image_url].empty?
+            params[:image_url] = 'https://static.vecteezy.com/system/resources/previews/020/765/399/non_2x/default-profile-account-unknown-icon-black-silhouette-free-vector.jpg'
+        end
         params.permit(:name, :market, :image_url)
     end
 
