@@ -1,6 +1,6 @@
 # ad-space
 
-Welcome to Ad Space! Ad Space is an open market for product advertisements. This app offers an easy way for companies to put up product ads that can then be claimed and run by advertising agencies. 
+Welcome to Ad Space! Ad Space is an open market for product advertisements. This app offers an easy way for companies to list product ads that can then be claimed and run by advertising agencies. 
 
 ## Features
 - All Users can:
